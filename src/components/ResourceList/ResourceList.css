@@ -1,0 +1,46 @@
+.UICard {
+	background-color: #b2b7bd47;
+	border-radius: 10px;
+	padding: 3% 3%;
+	margin: 1%;
+}
+
+.CardImage {
+	width: 100%;
+	box-shadow: 0 0 10px #323333;
+	border-radius: 20px;
+}
+
+.CardImage:hover {
+	transform: scale(1.005); 
+	box-shadow: 0 0 20px #323333;
+}
+
+.CardTitle {
+	font-weight: bold;
+	color: #daf8f0;
+}
+
+ul li {
+	list-style: none
+}
+
+.CardList{
+	padding-inline-start: 0;
+}
+.CardList li {
+	/*background-color: #000;*/
+	/*border-radius: 20px;*/padding: 5px; 
+	text-transform: capitalize;
+	list-style-type: none;
+	/*border-bottom: 1px solid black;*/
+	/*display: inline;*/
+	border-bottom: 1px solid grey;
+	text-align: center;
+	/*list-style-position: inside;*/
+	/*padding: 1%;*/
+}
+
+.CardList li:hover {
+	background-color: grey;	
+}

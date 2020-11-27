@@ -1,0 +1,33 @@
+a {
+	/* color: #fff; */
+	text-decoration: none;
+}
+
+a:hover {
+	width: 5%;
+	color: #fff;
+	text-decoration: none;
+}
+
+nav {
+	background-color: #000;
+	margin-bottom: 3%;
+	display: flex;
+}
+
+nav .Logo {
+
+}
+
+.Header ul {
+	display: flex;
+	width: 100%;
+}
+.Header ul:hover {
+	display: flex;
+	width: 100%;
+}
+.Header ul li {
+	padding-left: 2%;
+	padding-top: 2%;
+}
