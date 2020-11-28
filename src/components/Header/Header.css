@@ -14,20 +14,21 @@ nav {
 	margin-bottom: 3%;
 	display: flex;
 }
-
+nav ul {
+	display: flex;
+}
+/* 
 nav .Logo {
 
-}
+} */
 
-.Header ul {
-	display: flex;
+/* .Header ul {
 	width: 100%;
 }
 .Header ul:hover {
-	display: flex;
 	width: 100%;
-}
-.Header ul li {
+} */
+/* .Header ul li {
 	padding-left: 2%;
 	padding-top: 2%;
-}
+} */

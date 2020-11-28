@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {Component} from 'react'
 
 import './Header.css'
@@ -14,20 +15,23 @@ class Header extends Component {
 	render() {
 		const buttons = this.buttons.map(({label, name}) => {
 			return (
-				<li key={name}>
-					<a>{label}</a>
+				<li className="nav-item" key={name}>
+					<a className="nav-link" >{label}</a>
 				</li>
 			)
 		})
 		return (
-			<nav className="navbar Header">
-				<a className="navbar-brand">eCommerce</a>
-				<div className="Header">
-					<ul className="navbar-nav justify-content-center">
-						{buttons}
-					</ul>
+			<div className="Header d-flex">
+				<div>
+					<h3>
+						<a href="#">Gije-sky</a>
+					</h3>
+					<p>Asman yyldyz sanly harytlar</p>
 				</div>
-			</nav>
+				<ul className="d-flex">
+					{buttons}
+				</ul>
+			</div>
 		)
 	}
 }
