@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {Component} from 'react'
 
-import './Header.css'
+import './Navbar.css'
 
 
-class Header extends Component {
+class Navbar extends Component {
 
 	buttons = [
 		{label: 'Products', name: 'products'},
@@ -15,19 +15,16 @@ class Header extends Component {
 	render() {
 		const buttons = this.buttons.map(({label, name}) => {
 			return (
-				<li className="nav-item" key={name}>
-					<a className="nav-link" >{label}</a>
+				<li key={name}>
+					<a>{label}</a>
 				</li>
 			)
 		})
 		return (
-			<div className="Header d-flex">
-				<div>
-					<h3>
-						<a href="#">Gije-sky</a>
-					</h3>
-					<p>Asman yyldyz sanly harytlar</p>
-				</div>
+			<div className="Navbar d-flex">
+				<h4>
+					<a href="#">Gije-sky</a>
+				</h4>
 				<ul className="d-flex">
 					{buttons}
 				</ul>
@@ -36,4 +33,4 @@ class Header extends Component {
 	}
 }
 
-export default Header
+export default Navbar

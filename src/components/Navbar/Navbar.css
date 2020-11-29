@@ -1,0 +1,29 @@
+.Navbar {
+	margin-top: .5rem;
+	padding-left: 10px;
+	padding: .5rem 1rem;
+}
+
+.Navbar ul li {
+	list-style: none;
+	margin: 0;
+	padding: 0 1rem;
+	border-radius: 3px;
+	color: #00bc8c;
+}
+
+.Navbar ul li:hover {
+	background-color: rgba(30, 77, 95, 0.671);
+}
+
+.Navbar a:hover {
+	text-decoration: none;
+}
+
+.Navbar h4 a {
+	color: white;
+}
+
+.Navbar h4 a:hover {
+	color: #00bc8c;
+}

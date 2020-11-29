@@ -1,13 +1,13 @@
 import React from 'react'
 
-import Header from '../Header'
+import Navbar from '../Navbar'
 import ResourceList from '../ResourceList'
 import './App.css'
 
 const App = () => {
 	return (
 		<div className="App">
-			<Header />
+			<Navbar />
 			<div className="container-fluid">
 				<ResourceList />
 			</div>
