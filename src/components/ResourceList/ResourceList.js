@@ -8,13 +8,13 @@ const ResourceList = () => {
 	return (
 		<div>
 			<div className="row d-flex">
-				<div className="col-6 UICard">
+				<div className="col UICard">
 					<div className="row">
-						<div className="col-6">
+						<div className="col-4">
 							<img src={ResourceImage} alt="Resource Item" className="CardImage" />
 						</div>
 						<div className="col-6">
-							<p className="CardTitle">Some cool car</p>
+							<h5 className="CardTitle">Some cool car</h5>
 							<ul className="CardList">
 								<li>lorem</li>
 								<li>ipsum</li>

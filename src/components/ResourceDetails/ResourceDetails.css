@@ -1,0 +1,33 @@
+.ResourceDetails {
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: row;
+  padding: 1rem;
+}
+
+.ResourceDetails .ResourceImage {
+  width: 30%;
+  height: 30%;
+}
+
+.ResourceImage {
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgb(114, 112, 112);
+}
+
+.ResourceDetails .list-group-item {
+  padding: .25rem;
+}
+
+.ResourceDetails .list-group-item .term {
+  margin-right: .5rem;
+}
+
+.ResourceDetails .list-group-item {
+	text-transform: capitalize;
+	transition: 0.5s;
+}
+
+.ResourceDetails .list-group-item:hover {
+	background-color: grey;
+}

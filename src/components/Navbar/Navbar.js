@@ -16,14 +16,14 @@ class Navbar extends Component {
 		const buttons = this.buttons.map(({label, name}) => {
 			return (
 				<li key={name}>
-					<a>{label}</a>
+					<a href="#">{label}</a>
 				</li>
 			)
 		})
 		return (
 			<div className="Navbar d-flex">
 				<h4>
-					<a href="#">Gije-sky</a>
+					<a href="#">Al:Em shop</a>
 				</h4>
 				<ul className="d-flex">
 					{buttons}
