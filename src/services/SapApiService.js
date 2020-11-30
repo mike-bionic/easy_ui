@@ -1,7 +1,7 @@
 class SapApiService {
 	
-	// _apiBase = "http://127.0.0.1:5000/ls/api"
-	_apiBase = process.env.API_URL
+	_apiBase = "http://192.168.1.102:5000/ls/api/"
+	// _apiBase = process.env.API_URL
 	
 	async getApiData(url){
 		const res = await fetch(`${this._apiBase}${url}`)
@@ -37,26 +37,28 @@ class SapApiService {
 	}
 }
 
-const sapApi = new SapApiService()
+export default SapApiService
 
-sapApi.getResources().then((resources) => {
-	resources.data.forEach((resource) => {
-		console.log(resource.ResName)
-	})
-})
+// const sapApi = new SapApiService()
 
-sapApi.getResource(2).then((resource) => {
-	console.log(resource.data.ResName)
-})
+// sapApi.getResources().then((resources) => {
+// 	resources.data.forEach((resource) => {
+// 		console.log(resource.ResName)
+// 	})
+// })
 
-sapApi.getCategory(2).then((category) => {
-	console.log(category.data.ResCatName)
-})
+// sapApi.getResource(2).then((resource) => {
+// 	console.log(resource.data.ResName)
+// })
 
-sapApi.getCategories().then((categories) => {
-	console.log(categories)
-})
+// sapApi.getCategory(2).then((category) => {
+// 	console.log(category.data.ResCatName)
+// })
 
-sapApi.getSliders().then((sliders) => {
-	console.log(sliders)
-})
+// sapApi.getCategories().then((categories) => {
+// 	console.log(categories)
+// })
+
+// sapApi.getSliders().then((sliders) => {
+// 	console.log(sliders)
+// })

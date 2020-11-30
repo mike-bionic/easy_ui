@@ -2,7 +2,6 @@
 	margin-top: .5rem;
 	padding-left: 10px;
 	padding: .5rem 1rem;
-	/* justify-content: center; */
 }
 
 .Navbar ul li {
@@ -19,6 +18,7 @@
 
 .Navbar a:hover {
 	text-decoration: none;
+	color: #00bc8c;
 }
 
 .Navbar h4 a {

@@ -1,0 +1,25 @@
+.RandomCategory {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+}
+
+.RandomCategory .CategoryImage {
+  width: 150px;
+  height: 150px;
+  margin-right: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgb(151, 87, 87);
+}
+
+.RandomCategory .list-group {
+  margin: 1rem 0 0 1rem;
+}
+
+.RandomCategory .list-group-item {
+  padding: .25rem;
+}
+
+.RandomCategory .list-group-item .term {
+  margin-right: .5rem;
+}

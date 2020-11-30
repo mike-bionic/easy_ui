@@ -1,46 +1,9 @@
-.UICard {
-	background-color: #b2b7bd47;
-	border-radius: 10px;
-	padding: 3% 3%;
-	margin: 1%;
-	/* width: 90%; */
-	/* background: transparent; */
-	/* backdrop-filter: blur(8px); */
-}
-
-.CardImage {
-	width: 100%;
-	box-shadow: 0 0 10px #323333;
-	border-radius: 20px;
-}
-
-.CardImage:hover {
-	box-shadow: 0 0 20px #323333;
-	/* transform: scale(1.005);  */
-	transition: 0.5s;
-}
-
-.CardTitle {
-	font-weight: bold;
-	color: #daf8f0;
-}
-
-ul li {
-	list-style: none
-}
-
-.CardList{
-	padding-inline-start: 0;
-}
-.CardList li {
-	padding: 5px; 
-	text-transform: capitalize;
-	list-style-type: none;
-	border-bottom: 1px solid grey;
+.ResourceList .list-group-item {
+	cursor: pointer;
 	text-align: center;
-	transition: 0.5s;
+	transition: .5s;
 }
 
-.CardList li:hover {
-	background-color: grey;
+.ResourceList .list-group-item:hover {
+	background-color: #444;
 }
