@@ -2,7 +2,6 @@ import React from 'react'
 
 import './ResourceList.css'
 
-
 const ResourceList = () => {
 	return (
 	
