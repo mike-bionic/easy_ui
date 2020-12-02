@@ -1,64 +1,78 @@
 class SapApiService {
 	
-	_apiBase = "http://192.168.1.102:5000/ls/api/"
+	_apiBase = "http://192.168.1.100:5000"
+	_apiPrefix = "/ls/api/"
 	// _apiBase = process.env.API_URL
 	
 	async getApiData(url){
-		const res = await fetch(`${this._apiBase}${url}`)
-		if (!res.ok) {
-			throw new Error(`Could not fetch ${url}, received ${res.status}`)
+		const response = await fetch(`${this._apiBase}${this._apiPrefix}${url}`)
+		if (!response.ok) {
+			throw new Error(`Could not fetch ${url}, received ${response.status}`)
 		}
-		return await res.json()
+		return await response.json()
 	}
 	
 	async getResources() {
-		const res = await this.getApiData(`resources/`)
-		return res
+		const response = await this.getApiData(`resources/`)
+		return response.results.map(this._transformProducts)
 	}
 
-	async getResource(ResId) {
-		const res = await this.getApiData(`v-resources/${ResId}/`)
-		return res
+	async getResource(id) {
+		const response = await this.getApiData(`v-resources/${id}/`)
+		return this._transformProducts(response)
 	}
 
 	async getCategories() {
-		const res = await this.getApiData(`tbl-dk-categories/`)
-		return res
+		const response = await this.getApiData(`tbl-dk-categories/`)
+		return response.results.map(this._transformCategory)
 	}
 
 	async getCategory(ResCatId) {
-		const res = await this.getApiData(`tbl-dk-categories/${ResCatId}/`)
-		return res
+		const response = await this.getApiData(`tbl-dk-categories/${ResCatId}/`)
+		return this._transformCategory(response)
 	}
 
 	async getSliders() {
-		const res = await this.getApiData(`tbl-dk-sliders/`)
-		return res
+		const response = await this.getApiData(`tbl-dk-sliders/`)
+		return response.results.map(this._transformSliders)
+	}
+
+	async getSlider(id) {
+		const response = await this.getApiData(`tbl-dk-sliders/${id}/`)
+		return this._transformSliders(response)
+	}
+
+	_transformCategory(category) {
+		return {
+			ResCatId: category.data.ResCatId,
+			ResCatName: category.data.ResCatName,
+			IsMain: category.data.IsMain,
+			ResCatVisibleIndex: category.data.ResCatVisibleIndex,
+			CreatedDate: category.data.CreatedDate,
+			CategoryImage: `${this._apiBase}${category.data.ResCatIconFilePath}`
+		}
+	}
+
+	_transformProducts(product) {
+		return {
+			ResId: product.data.ResId,
+			ResName: product.data.ResName,
+			ResDesc: product.data.ResDesc,
+			UsageStatusName: product.data.UsageStatusName,
+			ResPriceValue: product.data.ResPriceValue,
+			CreatedDate: product.data.CreatedDate,
+			FilePathS: `${this._apiBase}${product.data.FilePathS}`
+		}
+	}
+
+	_transformSliders(slider) {
+		return {
+			SlId: slider.data.SlId,
+			SlName: slider.data.SlName,
+			SlDesc: slider.data.SlDesc,
+			CreatedDate: slider.data.CreatedDate
+		}
 	}
 }
 
 export default SapApiService
-
-// const sapApi = new SapApiService()
-
-// sapApi.getResources().then((resources) => {
-// 	resources.data.forEach((resource) => {
-// 		console.log(resource.ResName)
-// 	})
-// })
-
-// sapApi.getResource(2).then((resource) => {
-// 	console.log(resource.data.ResName)
-// })
-
-// sapApi.getCategory(2).then((category) => {
-// 	console.log(category.data.ResCatName)
-// })
-
-// sapApi.getCategories().then((categories) => {
-// 	console.log(categories)
-// })
-
-// sapApi.getSliders().then((sliders) => {
-// 	console.log(sliders)
-// })

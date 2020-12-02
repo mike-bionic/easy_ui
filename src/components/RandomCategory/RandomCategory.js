@@ -7,54 +7,52 @@ import './RandomCategory.css'
 class RandomCategory extends Component {
 
   state = {
-    ResCatName: null,
-    IsMain: false,
-    ResCatVisibleIndex: 0,
-    CreatedDate: null
+    category: {}
   }
 
   sapApi = new SapApiService();
 
   constructor() {
-      super();
-      this.updateCategory();
+    super();
+    this.updateCategory();
   }
+
+  onCategoryLoaded = (category) => {
+    console.log(category)
+    this.setState({category});
+  }
+
   updateCategory() {
+    const ResCatId = Math.floor(Math.random()*8) + 2
     this.sapApi
-      .getCategory(4)
-      .then((category) => {
-        this.setState({
-          ResCatName: category.data.ResCatName,
-          IsMain: category.data.IsMain,
-          ResCatVisibleIndex: category.data.ResCatVisibleIndex,
-          CreatedDate: category.data.CreatedDate,
-          CategoryImage: category.data.ResCatIconFilePath
-        })
-      })
-    }
-    
-    
+      .getCategory(ResCatId)
+      .then(this.onCategoryLoaded)
+  }
+
   render() {
 
-    const { 
-      ResCatName,
-      IsMain,
-      ResCatVisibleIndex,
-      CreatedDate,
-      CategoryImage} = this.state
-      
+    const { category: {
+        ResCatId,
+        ResCatName,
+        ResCatDesc,
+        ResCatVisibleIndex,
+        CreatedDate,
+        CategoryImage
+      } 
+    } = this.state
+    console.log(this.state)
     return (
       <div className="RandomCategory jumbotron rounded">
         <img 
-          src={`http://192.168.1.102:5000${CategoryImage}`}
+          src={CategoryImage}
           alt="Category" 
           className="CategoryImage" />
         <div>
           <h4>{ResCatName}</h4>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
-              <span className="term">Is main</span>
-              <span>{IsMain}</span>
+              <span className="term">Description</span>
+              <span>{ResCatDesc}</span>
             </li>
             <li className="list-group-item">
               <span className="term">Visible index</span>
