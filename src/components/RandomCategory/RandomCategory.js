@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 
 import SapApiService from '../../services/SapApiService'
 import Spinner from '../Spinner'
+import ErrorIndicator from '../ErrorIndicator'
 import './RandomCategory.css'
 
 
@@ -9,7 +10,8 @@ class RandomCategory extends Component {
 
   state = {
     category: {},
-    loading: true
+    loading: true,
+    error: false
   }
 
   sapApi = new SapApiService();
@@ -17,6 +19,14 @@ class RandomCategory extends Component {
   constructor() {
     super();
     this.updateCategory();
+    setInterval(this.updateCategory,2500)
+  }
+
+  onError = (err) => {
+    this.setState({
+      error: true,
+      loading: false
+    })
   }
 
   onCategoryLoaded = (category) => {
@@ -27,23 +37,26 @@ class RandomCategory extends Component {
     });
   }
 
-  updateCategory() {
+  updateCategory = () => {
     const ResCatId = Math.floor(Math.random()*8) + 2
     this.sapApi
       .getCategory(ResCatId)
       .then(this.onCategoryLoaded)
+      .catch(this.onError)
   }
 
   render() {
-    const {category, loading} = this.state
+    const {category, loading, error} = this.state
 
+    const errorView = error ? <ErrorIndicator /> : null
     const spinner = loading ? <Spinner /> : null
-    const categoryView = !loading ? <CategoryView category={category} /> : null
+    const categoryView = !(loading || error) ? <CategoryView category={category} /> : null
     
     return (
       <div className="RandomCategory jumbotron rounded">
         {spinner}
         {categoryView}
+        {errorView}
       </div>
     )
   }
