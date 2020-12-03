@@ -4,14 +4,13 @@ import Navbar from '../Navbar'
 import ResourceList from '../ResourceList'
 import ResourceDetails from '../ResourceDetails'
 import RandomCategory from '../RandomCategory'
-import Spinner from '../Spinner'
+
 import './App.css'
 
 const App = () => {
 	return (
 		<div className="App">
 			<Navbar />
-			<Spinner />
 			<div className="container-fluid">
 				<RandomCategory />
 				<div className="row mb2">

@@ -4,7 +4,7 @@ import './Spinner.css'
 
 const Spinner = () => {
   return (
-    <div className="spinner-grow text-dark"></div>
+    <div className="Spinner spinner-grow text-success"></div>
   )
 }
 
