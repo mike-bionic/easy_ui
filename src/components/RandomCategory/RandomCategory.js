@@ -16,8 +16,7 @@ class RandomCategory extends Component {
 
   sapApi = new SapApiService();
 
-  constructor() {
-    super();
+  componentDidMount() {
     this.updateCategory();
     setInterval(this.updateCategory,2500)
   }
@@ -30,7 +29,6 @@ class RandomCategory extends Component {
   }
 
   onCategoryLoaded = (category) => {
-    console.log(category)
     this.setState({
       category,
       loading: false

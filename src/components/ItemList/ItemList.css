@@ -1,9 +1,9 @@
-.ResourceList .list-group-item {
+.ItemList .list-group-item {
 	cursor: pointer;
 	text-align: center;
 	transition: .5s;
 }
 
-.ResourceList .list-group-item:hover {
+.ItemList .list-group-item:hover {
 	background-color: #444;
 }

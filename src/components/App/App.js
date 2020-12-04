@@ -1,29 +1,61 @@
-import React from 'react'
+import React, {Component} from 'react'
 
 import Navbar from '../Navbar'
-import ResourceList from '../ResourceList'
+import ItemList from '../ItemList'
 import ResourceDetails from '../ResourceDetails'
 import RandomCategory from '../RandomCategory'
 
 import './App.css'
 
-const App = () => {
-	return (
-		<div className="App">
-			<Navbar />
-			<div className="container-fluid">
-				<RandomCategory />
-				<div className="row mb2">
-					<div className="col-md-6">
-						<ResourceList />
-					</div>
-					<div className="col-md-6">
-						<ResourceDetails />
+class App extends Component {
+	
+	state = {
+		showRandomCategory: true,
+		selectedResource: null
+	}
+
+	toggleRandomCategory = () => {
+		this.setState((state) => {
+			return {
+				showRandomCategory: !state.showRandomCategory
+			}
+		})
+	}
+	
+	onResourceSelected = (ResId) => {
+		this.setState({
+			selectedResource: ResId
+		})
+	}
+
+	render() {
+
+		const categoryView = this.state
+			.showRandomCategory	? <RandomCategory /> : null
+		return (
+			<div className="App">
+				<Navbar />
+				<div className="container-fluid">
+					{categoryView}
+
+					<button
+						className="btn btn-warning"
+						onClick={this.toggleRandomCategory}>
+						Toggle Category
+					</button>
+
+					<div className="row mb2">
+						<div className="col-md-6">
+							<ItemList onItemSelected={this.onResourceSelected} />
+						</div>
+						<div className="col-md-6">
+							<ResourceDetails resourceId={this.state.selectedResource} />
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	)
+		)
+	}
 }
 
 export default App
