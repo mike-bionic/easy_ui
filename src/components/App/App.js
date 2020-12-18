@@ -11,7 +11,7 @@ class App extends Component {
 	
 	state = {
 		showRandomCategory: true,
-		selectedResource: 5
+		selectedResource: null
 	}
 
 	toggleRandomCategory = () => {
