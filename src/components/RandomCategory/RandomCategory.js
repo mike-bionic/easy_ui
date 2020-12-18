@@ -18,7 +18,11 @@ class RandomCategory extends Component {
 
   componentDidMount() {
     this.updateCategory();
-    setInterval(this.updateCategory,2500)
+    this.interval = setInterval(this.updateCategory,3500)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
   onError = (err) => {
