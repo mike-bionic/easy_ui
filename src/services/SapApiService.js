@@ -57,9 +57,10 @@ class SapApiService {
 		return {
 			ResId: product.ResId,
 			ResName: product.ResName,
-			ResDesc: product.ResDesc,
+			ResCatName: product.ResCatName,
 			UsageStatusName: product.UsageStatusName,
 			ResPriceValue: product.ResPriceValue,
+			BarcodeVal: product.BarcodeVal,
 			CreatedDate: product.CreatedDate,
 			FilePathS: `${this._apiBase}${product.FilePathS}`
 		}

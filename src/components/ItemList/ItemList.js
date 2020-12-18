@@ -36,7 +36,7 @@ class ItemList extends Component {
 				<li className="list-group-item"
 					key={ResId}
 					onClick={() => this.props.onItemSelected(ResId)}>
-					<a>{ResName}</a>
+					{ResName}
 				</li>
 			)
 		})

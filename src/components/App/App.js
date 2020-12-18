@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 import Navbar from '../Navbar'
 import ItemList from '../ItemList'
-import ResourceDetails from '../ResourceDetails'
+import ItemDetails from '../ItemDetails'
 import RandomCategory from '../RandomCategory'
 
 import './App.css'
@@ -11,7 +11,7 @@ class App extends Component {
 	
 	state = {
 		showRandomCategory: true,
-		selectedResource: null
+		selectedResource: 5
 	}
 
 	toggleRandomCategory = () => {
@@ -49,7 +49,7 @@ class App extends Component {
 							<ItemList onItemSelected={this.onResourceSelected} />
 						</div>
 						<div className="col-md-6">
-							<ResourceDetails resourceId={this.state.selectedResource} />
+							<ItemDetails resourceId={this.state.selectedResource} />
 						</div>
 					</div>
 				</div>
