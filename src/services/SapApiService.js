@@ -1,6 +1,6 @@
 class SapApiService {
 	
-	_apiBase = "http://192.168.1.100:5000"
+	_apiBase = "http://192.168.1.101:5000"
 	_apiPrefix = "/ls/api/"
 	// _apiBase = process.env.API_URL
 	
@@ -13,7 +13,7 @@ class SapApiService {
 	}
 	
 	async getResources() {
-		const response = await this.getApiData(`resources/`)
+		const response = await this.getApiData(`resources/?per_page=5`)
 		return response.data.map(this._transformProducts)
 	}
 

@@ -5,6 +5,7 @@ import './ItemDetails.css'
 import SapApiService from '../../services/SapApiService'
 import Spinner from '../Spinner'
 import ErrorIndicator from '../ErrorIndicator'
+import ErrorButton from '../ErrorButton'
 
 class ItemDetails extends Component {
 
@@ -105,6 +106,7 @@ const ItemView = ({resource}) => {
 						<span>{BarcodeVal}</span>
 					</li>
 				</ul>
+				<ErrorButton />
 			</div>
 		</React.Fragment>
 	)
