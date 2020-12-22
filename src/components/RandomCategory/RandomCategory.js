@@ -67,9 +67,9 @@ class RandomCategory extends Component {
 const CategoryView = ({category}) => {
 
   const {
-    ResCatId,
-    ResCatName,
-    ResCatDesc,
+    id,
+    name,
+    description,
     ResCatVisibleIndex,
     CreatedDate,
     CategoryImage
@@ -83,11 +83,11 @@ const CategoryView = ({category}) => {
           alt="Category" 
           className="CategoryImage" />
       <div>
-        <h4>{ResCatName}</h4>
+        <h4>{name}</h4>
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
             <span className="term">Description</span>
-            <span>{ResCatDesc}</span>
+            <span>{description}</span>
           </li>
           <li className="list-group-item">
             <span className="term">Visible index</span>

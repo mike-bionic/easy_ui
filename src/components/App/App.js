@@ -56,17 +56,6 @@ class App extends Component {
 					</div>
 
 					<ResourcePage />
-					<div className="row mb2 ResourcePage">
-						<div className="col-md-6">
-							<ItemList 
-								onItemSelected={this.onResourceSelected}
-								getData={this.sapApi.getCategories}
-								renderItem={(item) => (<span>${item.name} <button>!</button></span>)} />
-						</div>
-						<div className="col-md-6">
-							<ItemDetails resourceId={this.state.selectedResource} />
-						</div>
-					</div>
 				</div>
 			</div>
 		)

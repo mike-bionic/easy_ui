@@ -1,3 +1,7 @@
+.ItemList {
+	margin-bottom: 1rem;
+}
+
 .ItemList .list-group-item {
 	cursor: pointer;
 	/* text-align: center; */

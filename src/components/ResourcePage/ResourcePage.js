@@ -4,22 +4,9 @@ import './ResourcePage.css'
 
 import ItemList from '../ItemList'
 import ItemDetails from '../ItemDetails'
-import ErrorIndicator from '../ErrorIndicator'
 import SapApiService from '../../services/SapApiService'
-
-
-const Row = ({left, right}) => {
-	return (
-		<div className="row mb2 ResourcePage">
-			<div className="col-md-6">
-				{left}
-			</div>
-			<div className="col-md-6">
-				{right}
-			</div>
-		</div>
-	)
-}
+import Row from '../Row'
+import ErrorBoundry from '../ErrorBoundry'
 
 
 class ResourcePage extends Component {
@@ -27,15 +14,9 @@ class ResourcePage extends Component {
 	sapApi = new SapApiService()
 
 	state = {
-		selectedResource: null,
-		hasError: false
+		selectedResource: null
 	}
 
-	componentDidCatch() {
-		this.setState({
-			hasError: true
-		})
-	}
 	onResourceSelected = (ResId) => {
 		this.setState({
 			selectedResource: ResId
@@ -44,23 +25,28 @@ class ResourcePage extends Component {
 
 	
 	render(){
-		if (this.state.hasError){
-			return <ErrorIndicator />
-		}
 
 		const itemList = (
 			<ItemList 
 				onItemSelected={this.onResourceSelected}
-				getData={this.sapApi.getResources}
-				renderItem={({id, name, ResPriceValue, ResCatName}) => (
-					`${name} (${ResPriceValue} TMT | ${ResCatName})`)} />
+				getData={this.sapApi.getResources}>
+				
+				{(i) => (
+					`${i.name} (${i.ResPriceValue} TMT | ${i.ResCatName})`
+				)}
+			
+			</ItemList>
 		)
 		
 		const itemDetails = (
-			<ItemDetails resourceId={this.state.selectedResource} />
+			<ErrorBoundry>
+				<ItemDetails resourceId={this.state.selectedResource} />
+			</ErrorBoundry>
 		)
 		return (
-			<Row left={itemList} right={itemDetails} />
+			<ErrorBoundry>
+				<Row left={itemList} right={itemDetails} />
+			</ErrorBoundry>
 		)
 	}
 }

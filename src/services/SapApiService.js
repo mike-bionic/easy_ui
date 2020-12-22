@@ -46,6 +46,7 @@ class SapApiService {
 		return {
 			id: category.ResCatId,
 			name: category.ResCatName,
+			description: category.ResCatDesc,
 			IsMain: category.IsMain,
 			ResCatVisibleIndex: category.ResCatVisibleIndex,
 			CreatedDate: category.CreatedDate,
