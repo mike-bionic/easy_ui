@@ -1,42 +1,42 @@
 import React, {Component} from 'react'
-import SapApiService from '../../services/SapApiService'
 import Spinner from '../Spinner'
 
 import './ItemList.css'
 
 class ItemList extends Component {
 	
-	sapApi = new SapApiService()
-
 	state = {
 		resourceList: null
 	}
 
-  onError = (err) => {
-    this.setState({
-      error: true,
-      loading: false
-    })
-  }
+	onError = (err) => {
+		this.setState({
+			error: true,
+			loading: false
+		})
+	}
 	
 	componentDidMount() {
-		this.sapApi
-			.getResources()
-			.then((resourceList) => {
-				this.setState({
-					resourceList
+		const {getData} = this.props
+
+		getData()
+			.then((itemList) => {
+					this.setState({
+						itemList
+					})
 				})
-			})
-			.catch(this.onError)
+				.catch(this.onError)
 	}
 
 	renderItems(arr) {
-		return arr.map(({ResId, ResName}) => {
+		return arr.map((item) => {
+			const {id} = item
+			const label = this.props.renderItem(item)
 			return (
 				<li className="list-group-item"
-					key={ResId}
-					onClick={() => this.props.onItemSelected(ResId)}>
-					{ResName}
+					key={id}
+					onClick={() => this.props.onItemSelected(id)}>
+					{label}
 				</li>
 			)
 		})
@@ -44,12 +44,12 @@ class ItemList extends Component {
 	
 	render(){
 		
-		const {resourceList} = this.state
-		if (!resourceList) {
+		const {itemList} = this.state
+		if (!itemList) {
 			return <Spinner />
 		}
 
-		const resources = this.renderItems(resourceList);
+		const resources = this.renderItems(itemList);
 
 		return (
 			<ul className="ItemList list-group">

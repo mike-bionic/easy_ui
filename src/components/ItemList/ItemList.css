@@ -1,6 +1,6 @@
 .ItemList .list-group-item {
 	cursor: pointer;
-	text-align: center;
+	/* text-align: center; */
 	transition: .5s;
 }
 

@@ -4,7 +4,7 @@ class SapApiService {
 	_apiPrefix = "/ls/api/"
 	// _apiBase = process.env.API_URL
 	
-	async getApiData(url){
+	getApiData = async (url) => {
 		const response = await fetch(`${this._apiBase}${this._apiPrefix}${url}`)
 		if (!response.ok) {
 			throw new Error(`Could not fetch ${url}, received ${response.status}`)
@@ -12,40 +12,40 @@ class SapApiService {
 		return await response.json()
 	}
 	
-	async getResources() {
+	getResources = async () => {
 		const response = await this.getApiData(`resources/?per_page=5`)
-		return response.data.map(this._transformProducts)
+		return response.data.map(this._transformResources)
 	}
 
-	async getResource(id) {
+	getResource = async (id) => {
 		const response = await this.getApiData(`v-resources/${id}/`)
-		return this._transformProducts(response.data)
+		return this._transformResources(response.data)
 	}
 
-	async getCategories() {
+	getCategories = async () => {
 		const response = await this.getApiData(`tbl-dk-categories/`)
 		return response.data.map(this._transformCategory)
 	}
 
-	async getCategory(ResCatId) {
+	getCategory = async (ResCatId) => {
 		const response = await this.getApiData(`tbl-dk-categories/${ResCatId}/`)
 		return this._transformCategory(response.data)
 	}
 
-	async getSliders() {
+	getSliders = async () => {
 		const response = await this.getApiData(`tbl-dk-sliders/`)
 		return response.data.map(this._transformSliders)
 	}
 
-	async getSlider(id) {
+	getSlider = async (id) => {
 		const response = await this.getApiData(`tbl-dk-sliders/${id}/`)
 		return this._transformSliders(response.data)
 	}
 
 	_transformCategory = (category) => {
 		return {
-			ResCatId: category.ResCatId,
-			ResCatName: category.ResCatName,
+			id: category.ResCatId,
+			name: category.ResCatName,
 			IsMain: category.IsMain,
 			ResCatVisibleIndex: category.ResCatVisibleIndex,
 			CreatedDate: category.CreatedDate,
@@ -53,16 +53,17 @@ class SapApiService {
 		}
 	}
 
-	_transformProducts = (product) => {
+	_transformResources = (resource) => {
 		return {
-			ResId: product.ResId,
-			ResName: product.ResName,
-			ResCatName: product.ResCatName,
-			UsageStatusName: product.UsageStatusName,
-			ResPriceValue: product.ResPriceValue,
-			BarcodeVal: product.BarcodeVal,
-			CreatedDate: product.CreatedDate,
-			FilePathS: `${this._apiBase}${product.FilePathS}`
+			id: resource.ResId,
+			name: resource.ResName,
+			description: resource.ResDesc,
+			ResCatName: resource.ResCatName,
+			UsageStatusName: resource.UsageStatusName,
+			ResPriceValue: resource.ResPriceValue,
+			BarcodeVal: resource.BarcodeVal,
+			CreatedDate: resource.CreatedDate,
+			FilePathS: `${this._apiBase}${resource.FilePathS}`
 		}
 	}
 
