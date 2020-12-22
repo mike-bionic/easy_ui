@@ -7,18 +7,19 @@ import './App.css'
 import ErrorButton from '../ErrorButton'
 import ErrorIndicator from '../ErrorIndicator'
 import ResourcePage from '../ResourcePage/ResourcePage'
+import ErrorBoundry from '../ErrorBoundry'
 
 import ItemList from '../ItemList'
 import ItemDetails from '../ItemDetails'
 import SapApiService from '../../services/SapApiService'
+import Row from '../Row'
 
 
 class App extends Component {
 	sapApi = new SapApiService()
 	
 	state = {
-		showRandomCategory: true,
-		hasError: false
+		showRandomCategory: true
 	}
 
 	toggleRandomCategory = () => {
@@ -29,35 +30,46 @@ class App extends Component {
 		})
 	}
 
-	componentDidCatch() {
-		console.log("error occured")
-		this.setState({hasError: true})
-	}
-
 	render() {
-		if (this.state.hasError) {
-			return <ErrorIndicator />
-		}
+
 		const categoryView = this.state
 			.showRandomCategory	? <RandomCategory /> : null
+		
+		const {getResource, getCategory} = this.sapApi
+		
+		const resourceDetails = (
+			<ItemDetails itemId={3} getData={getResource} />
+		)
+		const categoryDetails = (
+			<ItemDetails itemId={4} getData={getCategory} />
+		)
+		
 		return (
-			<div className="App">
-				<Navbar />
-				<div className="container-fluid">
-					{categoryView}
+			<ErrorBoundry>
+				<div className="App">
+					<Navbar />
+					<div className="container-fluid">
+						<ErrorBoundry>
+							<Row
+								left={resourceDetails}
+								right={categoryDetails} />
+						</ErrorBoundry>
 
-					<div className="row mb2 ButtonRow">
-						<button
-							className="btn btn-warning"
-							onClick={this.toggleRandomCategory}>
-							Toggle Category
-						</button>
-						<ErrorButton />
+						{categoryView}
+
+						<div className="row mb2 ButtonRow">
+							<button
+								className="btn btn-warning"
+								onClick={this.toggleRandomCategory}>
+								Toggle Category
+							</button>
+							<ErrorButton />
+						</div>
+
+						<ResourcePage />
 					</div>
-
-					<ResourcePage />
 				</div>
-			</div>
+			</ErrorBoundry>
 		)
 	}
 }

@@ -32,7 +32,7 @@ class ResourcePage extends Component {
 				getData={this.sapApi.getResources}>
 				
 				{(i) => (
-					`${i.name} (${i.ResPriceValue} TMT | ${i.ResCatName})`
+					`${i.name} (${i.ResPriceValue} TMT | ${i.category})`
 				)}
 			
 			</ItemList>
@@ -40,7 +40,9 @@ class ResourcePage extends Component {
 		
 		const itemDetails = (
 			<ErrorBoundry>
-				<ItemDetails resourceId={this.state.selectedResource} />
+				<ItemDetails
+					itemId={this.state.selectedResource}
+					getData={this.sapApi.getResource} />
 			</ErrorBoundry>
 		)
 		return (

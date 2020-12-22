@@ -2,17 +2,14 @@ import React, {Component} from 'react'
 
 import './ItemDetails.css'
 
-import SapApiService from '../../services/SapApiService'
 import Spinner from '../Spinner'
 import ErrorIndicator from '../ErrorIndicator'
 import ErrorButton from '../ErrorButton'
 
 class ItemDetails extends Component {
 
-	sapApi = new SapApiService()
-
 	state = {
-		resource: null,
+		item: null,
 		loading: true,
 		error: false
 	}
@@ -22,28 +19,29 @@ class ItemDetails extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if (this.props.resourceId !== prevProps.resourceId){
+		if (this.props.itemId !== prevProps.itemId){
 			this.updateItem()
 		}
 	}
 
-  onError = (err) => {
-    this.setState({
-      error: true,
-      loading: false
-    })
-  }
+	onError = (err) => {
+		this.setState({
+			error: true,
+			loading: false
+		})
+	}
 
-  onItemLoaded = (resource) => {
-    this.setState({
-      resource,
-      loading: false
-    });
+	onItemLoaded = (item) => {
+		console.log(item)
+		this.setState({
+			item,
+			loading: false
+		});
 	}
 
 	updateItem() {
-		const { resourceId } = this.props;
-		if (!resourceId) {
+		const { itemId, getData } = this.props;
+		if (!itemId) {
 			return;
 		}
 		this.setState({
@@ -51,22 +49,21 @@ class ItemDetails extends Component {
 			error: false
 		})
 
-		this.sapApi
-			.getResource(resourceId)
+		getData(itemId)
 			.then(this.onItemLoaded)
 			.catch(this.onError)
 	}
 
 	render() {
-		const {resource, loading, error} = this.state
+		const {item, loading, error} = this.state
 		
-		if (!resource) {
+		if (!item) {
 			return <span>Select an Item from a list</span>
 		}
 
 		const errorView = error ? <ErrorIndicator /> : null
 		const spinner = loading ? <Spinner /> : null
-		const itemView = !(error || loading) ? <ItemView resource={resource} /> : null
+		const itemView = !(error || loading) ? <ItemView item={item} /> : null
 
 		return (
 			<div className="ItemDetails card">
@@ -78,32 +75,32 @@ class ItemDetails extends Component {
 	}
 }
 
-const ItemView = ({resource}) => {
+const ItemView = ({item}) => {
 	const {
-		ResId,
-		ResName,
-		FilePathS,
-		ResCatName,
-		BarcodeVal,
-		ResPriceValue} = resource
+		id,
+		name,
+		image,
+		category,
+		barcode,
+		price} = item
 
 	return (
 		<React.Fragment>
-			<img src={FilePathS} alt="Item" className="ItemImage" />
+			<img src={image} alt="Item" className="ItemImage" />
 			<div className="card-body">
-				<h4>{ResName}</h4>
+				<h4>{name}</h4>
 				<ul className="list-group list-group-flush">
 					<li className="list-group-item">
 						<span className="term">Category</span>
-						<span>{ResCatName}</span>
+						<span>{category}</span>
 					</li>
 					<li className="list-group-item">
 						<span className="term">Price</span>
-						<span>{ResPriceValue} TMT</span>
+						<span>{price} TMT</span>
 					</li>
 					<li className="list-group-item">
 						<span className="term">Barcode</span>
-						<span>{BarcodeVal}</span>
+						<span>{barcode}</span>
 					</li>
 				</ul>
 				<ErrorButton />

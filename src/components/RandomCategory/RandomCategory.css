@@ -4,7 +4,7 @@
   padding: 1rem;
 }
 
-.RandomCategory .CategoryImage {
+.RandomCategory img {
   width: 150px;
   height: 150px;
   margin-right: 1rem;

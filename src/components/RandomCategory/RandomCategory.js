@@ -70,18 +70,17 @@ const CategoryView = ({category}) => {
     id,
     name,
     description,
-    ResCatVisibleIndex,
-    CreatedDate,
-    CategoryImage
+    visibleIndex,
+    createdDate,
+    image
   } = category
 
 
   return (
     <React.Fragment>
       <img 
-          src={CategoryImage}
-          alt="Category" 
-          className="CategoryImage" />
+          src={image}
+          alt="Category" />
       <div>
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
@@ -91,11 +90,11 @@ const CategoryView = ({category}) => {
           </li>
           <li className="list-group-item">
             <span className="term">Visible index</span>
-            <span>{ResCatVisibleIndex}</span>
+            <span>{visibleIndex}</span>
           </li>
           <li className="list-group-item">
             <span className="term">Date</span>
-            <span>{CreatedDate}</span>
+            <span>{createdDate}</span>
           </li>
         </ul>
       </div>

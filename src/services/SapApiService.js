@@ -42,15 +42,19 @@ class SapApiService {
 		return this._transformSliders(response.data)
 	}
 
+	getApiImage = (image) => {
+		return `${this._apiBase}${image}`
+	}
+
 	_transformCategory = (category) => {
 		return {
 			id: category.ResCatId,
 			name: category.ResCatName,
 			description: category.ResCatDesc,
-			IsMain: category.IsMain,
-			ResCatVisibleIndex: category.ResCatVisibleIndex,
-			CreatedDate: category.CreatedDate,
-			CategoryImage: `${this._apiBase}${category.ResCatIconFilePath}`
+			isMain: category.IsMain,
+			visibleIndex: category.ResCatVisibleIndex,
+			createdDate: category.CreatedDate,
+			image: this.getApiImage(category.ResCatIconFilePath)
 		}
 	}
 
@@ -59,21 +63,21 @@ class SapApiService {
 			id: resource.ResId,
 			name: resource.ResName,
 			description: resource.ResDesc,
-			ResCatName: resource.ResCatName,
-			UsageStatusName: resource.UsageStatusName,
-			ResPriceValue: resource.ResPriceValue,
-			BarcodeVal: resource.BarcodeVal,
-			CreatedDate: resource.CreatedDate,
-			FilePathS: `${this._apiBase}${resource.FilePathS}`
+			category: resource.ResCatName,
+			usageStatus: resource.UsageStatusName,
+			price: resource.ResPriceValue,
+			barcode: resource.BarcodeVal,
+			createdDate: resource.CreatedDate,
+			image: this.getApiImage(resource.FilePathS)
 		}
 	}
 
 	_transformSliders = (slider) => {
 		return {
-			SlId: slider.SlId,
-			SlName: slider.SlName,
-			SlDesc: slider.SlDesc,
-			CreatedDate: slider.CreatedDate
+			id: slider.SlId,
+			name: slider.SlName,
+			description: slider.SlDesc,
+			createdDate: slider.CreatedDate
 		}
 	}
 }
