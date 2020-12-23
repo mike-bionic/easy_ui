@@ -5,19 +5,17 @@ import RandomCategory from '../RandomCategory'
 
 import './App.css'
 import ErrorButton from '../ErrorButton'
-import ErrorIndicator from '../ErrorIndicator'
 import ResourcePage from '../ResourcePage/ResourcePage'
 import ErrorBoundry from '../ErrorBoundry'
 
-import ItemList from '../ItemList'
-import ItemDetails from '../ItemDetails'
+import ItemDetails, {Record} from '../ItemDetails'
 import SapApiService from '../../services/SapApiService'
 import Row from '../Row'
 
 
 class App extends Component {
 	sapApi = new SapApiService()
-	
+
 	state = {
 		showRandomCategory: true
 	}
@@ -34,16 +32,24 @@ class App extends Component {
 
 		const categoryView = this.state
 			.showRandomCategory	? <RandomCategory /> : null
-		
+
 		const {getResource, getCategory} = this.sapApi
-		
+
 		const resourceDetails = (
-			<ItemDetails itemId={3} getData={getResource} />
+			<ItemDetails itemId={3} getData={getResource}>
+				<Record field='category' label='Category' />
+				<Record field='price' label='Price' />
+				<Record field='barcode' label='Barcode' />
+			</ItemDetails>
 		)
 		const categoryDetails = (
-			<ItemDetails itemId={4} getData={getCategory} />
+			<ItemDetails itemId={4} getData={getCategory}>
+				<Record field='visibleIndex' label='Visible Index' />
+				<Record field='createdDate' label='Date' />
+				<Record field='description' label='Description' />
+			</ItemDetails>
 		)
-		
+
 		return (
 			<ErrorBoundry>
 				<div className="App">

@@ -6,6 +6,21 @@ import Spinner from '../Spinner'
 import ErrorIndicator from '../ErrorIndicator'
 import ErrorButton from '../ErrorButton'
 
+
+const Record = ({item, field, label}) => {
+	return (
+		<li className="list-group-item">
+			<span className="term">{label}</span>
+			<span>{item[field]}</span>
+		</li>
+	)
+}
+
+export {
+	Record
+}
+
+
 class ItemDetails extends Component {
 
 	state = {
@@ -32,7 +47,6 @@ class ItemDetails extends Component {
 	}
 
 	onItemLoaded = (item) => {
-		console.log(item)
 		this.setState({
 			item,
 			loading: false
@@ -56,14 +70,15 @@ class ItemDetails extends Component {
 
 	render() {
 		const {item, loading, error} = this.state
-		
+		const {children} = this.props
+
 		if (!item) {
 			return <span>Select an Item from a list</span>
 		}
 
 		const errorView = error ? <ErrorIndicator /> : null
 		const spinner = loading ? <Spinner /> : null
-		const itemView = !(error || loading) ? <ItemView item={item} /> : null
+		const itemView = !(error || loading) ? <ItemView item={item} children={children} /> : null
 
 		return (
 			<div className="ItemDetails card">
@@ -75,14 +90,11 @@ class ItemDetails extends Component {
 	}
 }
 
-const ItemView = ({item}) => {
+const ItemView = ({item, children}) => {
 	const {
 		id,
 		name,
-		image,
-		category,
-		barcode,
-		price} = item
+		image} = item
 
 	return (
 		<React.Fragment>
@@ -90,18 +102,11 @@ const ItemView = ({item}) => {
 			<div className="card-body">
 				<h4>{name}</h4>
 				<ul className="list-group list-group-flush">
-					<li className="list-group-item">
-						<span className="term">Category</span>
-						<span>{category}</span>
-					</li>
-					<li className="list-group-item">
-						<span className="term">Price</span>
-						<span>{price} TMT</span>
-					</li>
-					<li className="list-group-item">
-						<span className="term">Barcode</span>
-						<span>{barcode}</span>
-					</li>
+					{
+						React.Children.map(children, (child) => {
+							return React.cloneElement(child, {item})
+						})
+					}
 				</ul>
 				<ErrorButton />
 			</div>

@@ -17,27 +17,27 @@ class ResourcePage extends Component {
 		selectedResource: null
 	}
 
-	onResourceSelected = (ResId) => {
+	onResourceSelected = (id) => {
 		this.setState({
-			selectedResource: ResId
+			selectedResource: id
 		})
 	}
 
-	
+
 	render(){
 
 		const itemList = (
-			<ItemList 
+			<ItemList
 				onItemSelected={this.onResourceSelected}
 				getData={this.sapApi.getResources}>
-				
+
 				{(i) => (
-					`${i.name} (${i.ResPriceValue} TMT | ${i.category})`
+					`${i.name} (${i.price} TMT | ${i.category})`
 				)}
-			
+
 			</ItemList>
 		)
-		
+
 		const itemDetails = (
 			<ErrorBoundry>
 				<ItemDetails
