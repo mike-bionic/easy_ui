@@ -4,10 +4,10 @@ import './ResourcePage.css'
 
 import ItemList from '../ItemList'
 import ItemDetails from '../ItemDetails'
-import SapApiService from '../../services/SapApiService'
+import SapApiService from '../../services'
 import Row from '../Row'
 import ErrorBoundry from '../ErrorBoundry'
-
+import {ResourceList, CategoryList} from '../ShopComponents'
 
 class ResourcePage extends Component {
 
@@ -23,19 +23,13 @@ class ResourcePage extends Component {
 		})
 	}
 
-
 	render(){
-
 		const itemList = (
-			<ItemList
-				onItemSelected={this.onResourceSelected}
-				getData={this.sapApi.getResources}>
-
+			<ResourceList	onItemSelected={this.onResourceSelected}>
 				{(i) => (
 					`${i.name} (${i.price} TMT | ${i.category})`
 				)}
-
-			</ItemList>
+			</ResourceList>
 		)
 
 		const itemDetails = (

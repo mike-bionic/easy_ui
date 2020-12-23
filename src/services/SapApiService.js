@@ -1,3 +1,5 @@
+import DefaultImage from './DefaultImage.svg'
+
 class SapApiService {
 	
 	_apiBase = "http://192.168.1.101:5000"
@@ -43,6 +45,9 @@ class SapApiService {
 	}
 
 	getApiImage = (image) => {
+		if (!image){
+			return DefaultImage
+		}
 		return `${this._apiBase}${image}`
 	}
 

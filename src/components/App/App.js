@@ -5,7 +5,7 @@ import RandomCategory from '../RandomCategory'
 
 import './App.css'
 import ErrorButton from '../ErrorButton'
-import ResourcePage from '../ResourcePage/ResourcePage'
+import ResourcePage from '../ResourcePage'
 import ErrorBoundry from '../ErrorBoundry'
 
 import ItemDetails, {Record} from '../ItemDetails'
@@ -43,7 +43,7 @@ class App extends Component {
 			</ItemDetails>
 		)
 		const categoryDetails = (
-			<ItemDetails itemId={4} getData={getCategory}>
+			<ItemDetails itemId={3} getData={getCategory}>
 				<Record field='visibleIndex' label='Visible Index' />
 				<Record field='createdDate' label='Date' />
 				<Record field='description' label='Description' />
