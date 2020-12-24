@@ -9,17 +9,17 @@ const sapApi = new SapApiService
 const {
   getResources,
   getCategories,
-  getSliders
+  getBrands
 } = sapApi
 
 const ResourceList = withData(ItemList, getResources)
 
 const CategoryList = withData(ItemList, getCategories)
 
-const SliderList = withData(ItemList, getSliders)
+const BrandList = withData(ItemList, getBrands)
 
 export {
   ResourceList,
   CategoryList,
-  SliderList
+  BrandList
 }

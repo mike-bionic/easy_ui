@@ -11,6 +11,7 @@ import ErrorBoundry from '../ErrorBoundry'
 import ItemDetails, {Record} from '../ItemDetails'
 import SapApiService from '../../services/SapApiService'
 import Row from '../Row'
+import { CategoryDetails, BrandDetails } from '../ShopComponents'
 
 
 class App extends Component {
@@ -55,6 +56,8 @@ class App extends Component {
 				<div className="App">
 					<Navbar />
 					<div className="container-fluid">
+						<CategoryDetails itemId={5} />
+						<BrandDetails itemId={1} />
 						<ErrorBoundry>
 							<Row
 								left={resourceDetails}

@@ -9,7 +9,7 @@ class Navbar extends Component {
 	buttons = [
 		{label: 'Products', name: 'products'},
 		{label: 'Categories', name: 'categories'},
-		{label: 'Sliders', name: 'sliders'},
+		{label: 'Brands', name: 'brands'},
 	]
 	
 	render() {

@@ -2,12 +2,11 @@ import React, {Component} from 'react'
 
 import './ResourcePage.css'
 
-import ItemList from '../ItemList'
-import ItemDetails from '../ItemDetails'
+import ItemDetails, { Record } from '../ItemDetails'
 import SapApiService from '../../services'
 import Row from '../Row'
 import ErrorBoundry from '../ErrorBoundry'
-import {ResourceList, CategoryList} from '../ShopComponents'
+import {ResourceList} from '../ShopComponents'
 
 class ResourcePage extends Component {
 
@@ -36,7 +35,11 @@ class ResourcePage extends Component {
 			<ErrorBoundry>
 				<ItemDetails
 					itemId={this.state.selectedResource}
-					getData={this.sapApi.getResource} />
+					getData={this.sapApi.getResource} >
+					<Record field='category' label='Category' />
+					<Record field='price' label='Price' />
+					<Record field='barcode' label='Barcode' />
+				</ItemDetails>
 			</ErrorBoundry>
 		)
 		return (

@@ -1,20 +1,20 @@
 import {
   ResourceDetails,
   CategoryDetails,
-  SliderDetails
+  BrandDetails
 } from './Details'
 
 import {
   ResourceList,
   CategoryList,
-  SliderList
-} from './ItemLists'
+  BrandList
+} from './Lists'
 
 export {
   ResourceDetails,
   CategoryDetails,
-  SliderDetails,
+  BrandDetails,
   ResourceList,
   CategoryList,
-  SliderList
+  BrandList
 }

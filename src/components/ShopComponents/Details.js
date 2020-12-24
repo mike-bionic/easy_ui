@@ -6,19 +6,48 @@ import SapApiService from '../../services'
 const sapApi = new SapApiService()
 
 const {
-  getResource,
-  getCategory,
-  getSlider
+	getResource,
+	getCategory,
+	getBrand
 } = sapApi
 
-const ResourceDetails = () => {}
+const ResourceDetails = ({itemId}) => {
+	return(
+		<ItemDetails
+			itemId={itemId}
+			getData={getResource} >
+			<Record field='category' label='Category' />
+			<Record field='price' label='Price' />
+			<Record field='barcode' label='Barcode' />
+		</ItemDetails>
+	)
+}
 
-const CategoryDetails = () => {}
+const CategoryDetails = ({itemId}) => {
+	return(
+		<ItemDetails
+			itemId={itemId}
+			getData={getCategory} >
+			<Record field='description' label='Description' />
+			<Record field='visibleIndex' label='Visible index' />
+			<Record field='createdDate' label='Date' />
+		</ItemDetails>
+	)
+}
 
-const SliderDetails = () => {}
+const BrandDetails = ({itemId}) => {
+	return(
+		<ItemDetails
+			itemId={itemId}
+			getData={getBrand} >
+			<Record field='description' label='Description' />
+			<Record field='link' label='Link' />
+		</ItemDetails>
+	)
+}
 
 export {
-  ResourceDetails,
-  CategoryDetails,
-  SliderDetails
+	ResourceDetails,
+	CategoryDetails,
+	BrandDetails
 }

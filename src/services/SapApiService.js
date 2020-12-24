@@ -34,14 +34,14 @@ class SapApiService {
 		return this._transformCategory(response.data)
 	}
 
-	getSliders = async () => {
-		const response = await this.getApiData(`tbl-dk-sliders/`)
-		return response.data.map(this._transformSliders)
+	getBrands = async () => {
+		const response = await this.getApiData(`tbl-dk-brands/`)
+		return response.data.map(this._transformBrands)
 	}
 
-	getSlider = async (id) => {
-		const response = await this.getApiData(`tbl-dk-sliders/${id}/`)
-		return this._transformSliders(response.data)
+	getBrand = async (id) => {
+		const response = await this.getApiData(`tbl-dk-brands/?id=${id}`)
+		return this._transformBrands(response.data)
 	}
 
 	getApiImage = (image) => {
@@ -77,12 +77,14 @@ class SapApiService {
 		}
 	}
 
-	_transformSliders = (slider) => {
+	_transformBrands = (brand) => {
 		return {
-			id: slider.SlId,
-			name: slider.SlName,
-			description: slider.SlDesc,
-			createdDate: slider.CreatedDate
+			id: brand.BrandId,
+			name: brand.BrandName,
+			description: brand.BrandDesc,
+			link: brand.BrandLink1,
+			createdDate: brand.CreatedDate,
+			image: this.getApiImage(brand.Images[0].FilePathS),
 		}
 	}
 }
