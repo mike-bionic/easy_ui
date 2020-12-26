@@ -11,7 +11,7 @@ import ErrorBoundry from '../ErrorBoundry'
 import ItemDetails, {Record} from '../ItemDetails'
 import SapApiService from '../../services/SapApiService'
 import Row from '../Row'
-import { CategoryDetails, BrandDetails } from '../ShopComponents'
+import { CategoryDetails, BrandDetails, BrandList } from '../ShopComponents'
 
 
 class App extends Component {
@@ -76,6 +76,7 @@ class App extends Component {
 						</div>
 
 						<ResourcePage />
+						<BrandList />
 					</div>
 				</div>
 			</ErrorBoundry>

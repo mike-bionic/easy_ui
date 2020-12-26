@@ -7,19 +7,38 @@ import SapApiService from '../../services'
 const sapApi = new SapApiService
 
 const {
-  getResources,
-  getCategories,
-  getBrands
+	getResources,
+	getCategories,
+	getBrands
 } = sapApi
 
-const ResourceList = withData(ItemList, getResources)
+const withChildFunction = (Wrapped, fn) => {
+	return(props) => {
+		return(
+			<Wrapped {...props}>
+				{fn}
+			</Wrapped>
+		)
+	}
+}
 
-const CategoryList = withData(ItemList, getCategories)
+const renderName = ({name}) => <span>{name}</span>
+const renderNameAndPrice = ({name, price}) => <span>{name} | {price} TMT</span>
 
-const BrandList = withData(ItemList, getBrands)
+const ResourceList = withData(
+	withChildFunction(ItemList, renderNameAndPrice),
+	getResources)
+
+const CategoryList = withData(
+	withChildFunction(ItemList, renderName),
+	getCategories)
+
+const BrandList = withData(
+	withChildFunction(ItemList, renderName),
+	getBrands)
 
 export {
-  ResourceList,
-  CategoryList,
-  BrandList
+	ResourceList,
+	CategoryList,
+	BrandList
 }

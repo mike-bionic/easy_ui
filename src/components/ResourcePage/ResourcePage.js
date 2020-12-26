@@ -25,9 +25,9 @@ class ResourcePage extends Component {
 	render(){
 		const itemList = (
 			<ResourceList	onItemSelected={this.onResourceSelected}>
-				{(i) => (
+				{/* {(i) => (
 					`${i.name} (${i.price} TMT | ${i.category})`
-				)}
+				)} */}
 			</ResourceList>
 		)
 
