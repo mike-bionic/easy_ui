@@ -29,8 +29,8 @@ class SapApiService {
 		return response.data.map(this._transformCategory)
 	}
 
-	getCategory = async (ResCatId) => {
-		const response = await this.getApiData(`tbl-dk-categories/${ResCatId}/`)
+	getCategory = async (id) => {
+		const response = await this.getApiData(`tbl-dk-categories/${id}/`)
 		return this._transformCategory(response.data)
 	}
 
