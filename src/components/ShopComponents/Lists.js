@@ -26,16 +26,13 @@ const renderName = ({name}) => <span>{name}</span>
 const renderNameAndPrice = ({name, price}) => <span>{name} | {price} TMT</span>
 
 const ResourceList = withData(
-	withChildFunction(ItemList, renderNameAndPrice),
-	getResources)
+	withChildFunction(ItemList, renderNameAndPrice), getResources)
 
 const CategoryList = withData(
-	withChildFunction(ItemList, renderName),
-	getCategories)
+	withChildFunction(ItemList, renderName), getCategories)
 
 const BrandList = withData(
-	withChildFunction(ItemList, renderName),
-	getBrands)
+	withChildFunction(ItemList, renderName), getBrands)
 
 export {
 	ResourceList,

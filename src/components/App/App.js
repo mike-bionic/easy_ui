@@ -8,8 +8,7 @@ import ErrorButton from '../ErrorButton'
 import ResourcePage from '../ResourcePage'
 import ErrorBoundry from '../ErrorBoundry'
 
-import SapApiService from '../../services/SapApiService'
-import MockSapApiService from '../../services/MockSapApiService'
+import SapApiService, {MockSapApiService} from '../../services'
 import {ApiServiceProvider} from '../ApiServiceContext'
 import { CategoryDetails, BrandDetails, BrandList } from '../ShopComponents'
 

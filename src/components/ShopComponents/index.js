@@ -1,8 +1,6 @@
-import {
-  ResourceDetails,
-  CategoryDetails,
-  BrandDetails
-} from './Details'
+import BrandDetails from './BrandDetails'
+import CategoryDetails from './CategoryDetails'
+import ResourceDetails from './ResourceDetails'
 
 import {
   ResourceList,
