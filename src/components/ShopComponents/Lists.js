@@ -1,16 +1,8 @@
 import React from 'react'
 
 import ItemList from '../ItemList'
-import {withData} from '../HOC'
-import SapApiService from '../../services'
+import {withData, withApiService} from '../HOC'
 
-const sapApi = new SapApiService
-
-const {
-	getResources,
-	getCategories,
-	getBrands
-} = sapApi
 
 const withChildFunction = (Wrapped, fn) => {
 	return(props) => {
@@ -25,14 +17,39 @@ const withChildFunction = (Wrapped, fn) => {
 const renderName = ({name}) => <span>{name}</span>
 const renderNameAndPrice = ({name, price}) => <span>{name} | {price} TMT</span>
 
-const ResourceList = withData(
-	withChildFunction(ItemList, renderNameAndPrice), getResources)
+const mapResourceMethodsToProps = (sapApi) => {
+	return {
+		getData: sapApi.getResources
+	}
+}
+ 
+const mapBrandMethodsToProps = (sapApi) => {
+	return {
+		getData: sapApi.getBrands
+	}
+}
 
-const CategoryList = withData(
-	withChildFunction(ItemList, renderName), getCategories)
+const mapCategoryMethodsToProps = (sapApi) => {
+	return {
+		getData: sapApi.getCategories
+	}
+}
 
-const BrandList = withData(
-	withChildFunction(ItemList, renderName), getBrands)
+
+const ResourceList = withApiService(
+	withData(
+		withChildFunction(ItemList, renderNameAndPrice)),
+		mapResourceMethodsToProps)
+
+const CategoryList = withApiService(
+	withData(
+		withChildFunction(ItemList, renderName)),
+		mapCategoryMethodsToProps)
+
+const BrandList = withApiService(
+	withData(
+		withChildFunction(ItemList, renderName)),
+		mapBrandMethodsToProps)
 
 export {
 	ResourceList,

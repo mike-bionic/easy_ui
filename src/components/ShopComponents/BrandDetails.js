@@ -3,16 +3,20 @@ import React from 'react'
 import ItemDetails, {Record} from '../ItemDetails'
 import {withApiService} from '../HOC'
 
-const BrandDetails = ({itemId, sapApi}) => {
-	const {getBrand} = sapApi
+const BrandDetails = (props) => {
 	return (
-		<ItemDetails
-			itemId={itemId}
-			getData={getBrand} >
+		<ItemDetails {...props}>
 			<Record field='description' label='Description' />
 			<Record field='link' label='Link' />
 		</ItemDetails>
 	)
 }
 
-export default withApiService(BrandDetails)
+const mapMethodsToProps = (sapApi) => {
+	return {
+		getData: sapApi.getBrand
+	}
+} 
+
+
+export default withApiService(BrandDetails, mapMethodsToProps)
