@@ -28,3 +28,7 @@
 .Navbar h4 a:hover {
 	color: #00bc8c;
 }
+
+.Navbar button {
+	height: 2.2rem;
+}

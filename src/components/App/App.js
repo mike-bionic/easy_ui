@@ -1,85 +1,47 @@
 import React, {Component} from 'react'
 
+import './App.css'
+
 import Navbar from '../Navbar'
 import RandomCategory from '../RandomCategory'
-
-import './App.css'
-import ErrorButton from '../ErrorButton'
-import ResourcePage from '../ResourcePage'
+import {ResourcePage, BrandPage, CategoryPage} from '../Pages'
 import ErrorBoundry from '../ErrorBoundry'
 
 import SapApiService, {MockSapApiService} from '../../services'
 import {ApiServiceProvider} from '../ApiServiceContext'
-import { CategoryDetails, BrandDetails, BrandList } from '../ShopComponents'
-
-import ItemDetails, {Record} from '../ItemDetails'
-import Row from '../Row'
 
 
 class App extends Component {
-	sapApi = new SapApiService()
-
+	
 	state = {
-		showRandomCategory: true
+		sapApi: new SapApiService()
 	}
 
-	toggleRandomCategory = () => {
-		this.setState((state) => {
+	onServiceChange = () => {
+		this.setState(({sapApi}) => {
+			const Service = sapApi instanceof SapApiService ? 
+				MockSapApiService : SapApiService
+			console.log("switched to ", Service.name)
 			return {
-				showRandomCategory: !state.showRandomCategory
+				sapApi: new Service()
 			}
 		})
 	}
 
 	render() {
-
-		const categoryView = this.state
-			.showRandomCategory	? <RandomCategory /> : null
-
-		const {getResource, getCategory} = this.sapApi
-
-		const resourceDetails = (
-			<ItemDetails itemId={3} getData={getResource}>
-				<Record field='category' label='Category' />
-				<Record field='price' label='Price' />
-				<Record field='barcode' label='Barcode' />
-			</ItemDetails>
-		)
-		const categoryDetails = (
-			<ItemDetails itemId={3} getData={getCategory}>
-				<Record field='visibleIndex' label='Visible Index' />
-				<Record field='createdDate' label='Date' />
-				<Record field='description' label='Description' />
-			</ItemDetails>
-		)
-
 		return (
 			<ErrorBoundry>
-				<ApiServiceProvider value={this.sapApi} >
+				<ApiServiceProvider value={this.state.sapApi} >
 					<div className="App">
-						<Navbar />
+						<Navbar onServiceChange={this.onServiceChange} />
 						<div className="container-fluid">
-							<CategoryDetails itemId={5} />
-							<BrandDetails itemId={1} />
-							<ErrorBoundry>
-								<Row
-									left={resourceDetails}
-									right={categoryDetails} />
-							</ErrorBoundry>
 
-							{categoryView}
-
-							<div className="row mb2 ButtonRow">
-								<button
-									className="btn btn-warning"
-									onClick={this.toggleRandomCategory}>
-									Toggle Category
-								</button>
-								<ErrorButton />
-							</div>
+							<RandomCategory />
 
 							<ResourcePage />
-							<BrandList />
+							<BrandPage />
+							<CategoryPage />
+
 						</div>
 					</div>
 				</ApiServiceProvider>

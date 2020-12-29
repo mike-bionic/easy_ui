@@ -20,16 +20,30 @@ const withData = (View) => {
 			console.log(this.state)
 		}
 		
-		componentDidMount() {
-	
+		componentDidUpdate(prevProps) {
+			if (this.props.getData !== prevProps.getData) {
+				this.update()
+			}
+		}
+
+		componentDidMount() {	
+			this.update()
+		}
+
+		update() {
+			this.setState({
+				loading: true,
+				error: false
+			})
+
 			this.props.getData()
-				.then((data) => {
-					this.setState({
-						data,
-						loading: false
-					})
+			.then((data) => {
+				this.setState({
+					data,
+					loading: false
 				})
-				.catch(this.onError)
+			})
+			.catch(this.onError)
 		}
 	
 		render() {

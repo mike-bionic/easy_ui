@@ -1,7 +1,7 @@
 import React from 'react'
 import {ApiServiceConsumer} from '../ApiServiceContext'
 
-const withApiService = (Wrapped, mapMethodsToProps) => {
+const withApiService = (mapMethodsToProps) => (Wrapped) => {
 	return (props) => {
 		return (
 			<ApiServiceConsumer>

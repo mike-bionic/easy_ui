@@ -1,18 +1,12 @@
 import React from 'react'
 
 import ItemList from '../ItemList'
-import {withData, withApiService} from '../HOC'
-
-
-const withChildFunction = (Wrapped, fn) => {
-	return(props) => {
-		return(
-			<Wrapped {...props}>
-				{fn}
-			</Wrapped>
-		)
-	}
-}
+import {
+	withData,
+	withApiService,
+	withChildFunction,
+	compose
+} from '../HOC'
 
 const renderName = ({name}) => <span>{name}</span>
 const renderNameAndPrice = ({name, price}) => <span>{name} | {price} TMT</span>
@@ -35,21 +29,23 @@ const mapCategoryMethodsToProps = (sapApi) => {
 	}
 }
 
+const ResourceList = compose(
+		withApiService(mapResourceMethodsToProps),
+		withData,
+		withChildFunction(renderNameAndPrice)
+	)(ItemList)
 
-const ResourceList = withApiService(
-	withData(
-		withChildFunction(ItemList, renderNameAndPrice)),
-		mapResourceMethodsToProps)
+const CategoryList = compose(
+		withApiService(mapCategoryMethodsToProps),
+		withData,
+		withChildFunction(renderName)
+	)(ItemList)
 
-const CategoryList = withApiService(
-	withData(
-		withChildFunction(ItemList, renderName)),
-		mapCategoryMethodsToProps)
-
-const BrandList = withApiService(
-	withData(
-		withChildFunction(ItemList, renderName)),
-		mapBrandMethodsToProps)
+const BrandList = compose(
+		withApiService(mapBrandMethodsToProps),
+		withData,
+		withChildFunction(renderName)
+	)(ItemList)
 
 export {
 	ResourceList,
