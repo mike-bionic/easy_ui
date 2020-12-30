@@ -18,5 +18,4 @@ const mapMethodsToProps = (sapApi) => {
 	}
 } 
 
-
-export default withApiService(BrandDetails, mapMethodsToProps)
+export default withApiService(mapMethodsToProps)(BrandDetails)
