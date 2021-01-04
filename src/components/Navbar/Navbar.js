@@ -1,32 +1,26 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {Component} from 'react'
+import React from 'react'
+import {Link} from 'react-router-dom'
 
 import './Navbar.css'
 
 
 const Navbar = ({onServiceChange}) => {
 
-	const buttons_list = [
-		{label: 'Products', name: 'products'},
-		{label: 'Categories', name: 'categories'},
-		{label: 'Brands', name: 'brands'},
-	]
-
-	const buttons = buttons_list.map(({label, name}) => {
-		return (
-			<li key={name}>
-				<a href="#">{label}</a>
-			</li>
-		)
-	})
-
 	return (
 		<div className="Navbar d-flex">
 			<h4>
-				<a href="#">Al:Em shop</a>
+				<Link to="/">Al:Em shop</Link>
 			</h4>
 			<ul className="d-flex">
-				{buttons}
+				<li>
+					<Link to="/products">Products</Link>
+				</li>
+				<li>
+					<Link to="/categories">Categories</Link>
+				</li>
+				<li>
+					<Link to="/brands">Brands</Link>
+				</li>
 			</ul>
 			<button
 				onClick={onServiceChange}
