@@ -42,15 +42,15 @@ class App extends Component {
 
 								<RandomCategory />
 								<Route path="/" exact render={() => <h2>Welcome to Al:Em shop</h2>} />
-								<Route path="/products" exact component={ResourcePage} />
+								<Route path="/products/" exact component={ResourcePage} />
 								<Route path="/products/:id"
 									render={({match}) => {
 										const {id} = match.params
 										return <ResourceDetails itemId={id} />
 									}} />
 
-								<Route path="/categories" component={CategoryPage} />
-								<Route path="/brands" component={BrandPage} />
+								<Route path="/categories/" component={CategoryPage} />
+								<Route path="/brands/" component={BrandPage} />
 
 							</div>
 						</div>

@@ -13,13 +13,13 @@ const Navbar = ({onServiceChange}) => {
 			</h4>
 			<ul className="d-flex">
 				<li>
-					<Link to="/products">Products</Link>
+					<Link to="/products/">Products</Link>
 				</li>
 				<li>
-					<Link to="/categories">Categories</Link>
+					<Link to="/categories/">Categories</Link>
 				</li>
 				<li>
-					<Link to="/brands">Brands</Link>
+					<Link to="/brands/">Brands</Link>
 				</li>
 			</ul>
 			<button

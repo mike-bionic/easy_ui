@@ -10,8 +10,8 @@ const ResourcePage = ({ history }) => {
 	return (
 		<ErrorBoundry>
 			<ResourceList
-				onItemSelected={(itemId) => {
-					history.push(`/products/${itemId}`)
+				onItemSelected={(id) => {
+					history.push(`${id}`)
 				}} />
 		</ErrorBoundry>
 	)
