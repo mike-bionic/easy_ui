@@ -21,6 +21,12 @@ const Navbar = ({onServiceChange}) => {
 				<li>
 					<Link to="/brands/">Brands</Link>
 				</li>
+				<li>
+					<Link to="/login">Login</Link>
+				</li>
+				<li>
+					<Link to="/secret">Secret</Link>
+				</li>
 			</ul>
 			<button
 				onClick={onServiceChange}

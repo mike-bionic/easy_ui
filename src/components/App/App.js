@@ -1,11 +1,22 @@
 import React, {Component} from 'react'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+	Redirect
+} from 'react-router-dom'
 
 import './App.css'
 
 import Navbar from '../Navbar'
 import RandomCategory from '../RandomCategory'
-import {ResourcePage, BrandPage, CategoryPage} from '../Pages'
+import {
+	ResourcePage,
+	BrandPage,
+	CategoryPage,
+	LoginPage,
+	SecretPage
+} from '../Pages'
 import ErrorBoundry from '../ErrorBoundry'
 
 import SapApiService, {MockSapApiService} from '../../services'
@@ -16,7 +27,12 @@ import { ResourceDetails } from '../ShopComponents'
 class App extends Component {
 
 	state = {
-		sapApi: new SapApiService()
+		sapApi: new SapApiService(),
+		isLoggedIn: false
+	}
+
+	onLogin = () => {
+		this.setState({isLoggedIn: true})
 	}
 
 	onServiceChange = () => {
@@ -31,6 +47,9 @@ class App extends Component {
 	}
 
 	render() {
+
+		const { isLoggedIn } = this.state
+
 		return (
 			<ErrorBoundry>
 				<ApiServiceProvider value={this.state.sapApi} >
@@ -41,16 +60,29 @@ class App extends Component {
 							<div className="container-fluid">
 
 								<RandomCategory />
-								<Route path="/" exact render={() => <h2>Welcome to Al:Em shop</h2>} />
-								<Route path="/products/" exact component={ResourcePage} />
-								<Route path="/products/:id"
-									render={({match}) => {
-										const {id} = match.params
-										return <ResourceDetails itemId={id} />
-									}} />
+								<Switch>
+									<Route path="/" exact render={() => <h2>Welcome to Al:Em shop</h2>} />
+									<Route path="/products/" exact component={ResourcePage} />
+									<Route path="/products/:id"
+										render={({match}) => {
+											const {id} = match.params
+											return <ResourceDetails itemId={id} />
+										}} />
 
-								<Route path="/categories/:id?" component={CategoryPage} />
-								<Route path="/brands/" component={BrandPage} />
+									<Route path="/categories/:id?" component={CategoryPage} />
+									<Route path="/brands/" component={BrandPage} />
+									<Route 
+										path="/login" 
+										render={() => (
+											<LoginPage 
+												isLoggedIn={isLoggedIn}
+												onLogin={this.onLogin} />
+										)} />
+									<Route 
+										path="/secret"
+										render={() => (<SecretPage isLoggedIn={isLoggedIn} />)} />
+									<Redirect to="/" />
+								</Switch>
 
 							</div>
 						</div>
