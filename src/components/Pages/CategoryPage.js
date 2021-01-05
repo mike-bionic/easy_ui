@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React from 'react'
+import { withRouter } from 'react-router-dom'
 
 import './Pages.css'
 
@@ -6,34 +7,26 @@ import Row from '../Row'
 import ErrorBoundry from '../ErrorBoundry'
 import {CategoryDetails,CategoryList} from '../ShopComponents'
 
-class CategoryPage extends Component {
-	state = {
-		selectedItem: null
-	}
+const CategoryPage = ({history, match}) => {
+	const {id} = match.params
 
-	onItemSelected = (selectedItem) => {
-		this.setState({selectedItem})
-	}
+	const itemList = (
+		<CategoryList	onItemSelected={(id) => {
+			history.push(`${id}`)
+		}} />
+	)
 
-	render(){
-		const {selectedItem} = this.state
+	const itemDetails = (
+		<ErrorBoundry>
+			<CategoryDetails itemId={id} />
+		</ErrorBoundry>
+	)
 
-		const itemList = (
-			<CategoryList	onItemSelected={this.onItemSelected} />
-		)
-
-		const itemDetails = (
-			<ErrorBoundry>
-				<CategoryDetails itemId={selectedItem} />
-			</ErrorBoundry>
-		)
-
-		return (
-			<ErrorBoundry>
-				<Row left={itemList} right={itemDetails} />
-			</ErrorBoundry>
-		)
-	}
+	return (
+		<ErrorBoundry>
+			<Row left={itemList} right={itemDetails} />
+		</ErrorBoundry>
+	)
 }
 
-export default CategoryPage
+export default withRouter(CategoryPage)

@@ -14,14 +14,14 @@ import { ResourceDetails } from '../ShopComponents'
 
 
 class App extends Component {
-	
+
 	state = {
 		sapApi: new SapApiService()
 	}
 
 	onServiceChange = () => {
 		this.setState(({sapApi}) => {
-			const Service = sapApi instanceof SapApiService ? 
+			const Service = sapApi instanceof SapApiService ?
 				MockSapApiService : SapApiService
 			console.log("switched to ", Service.name)
 			return {
@@ -49,7 +49,7 @@ class App extends Component {
 										return <ResourceDetails itemId={id} />
 									}} />
 
-								<Route path="/categories/" component={CategoryPage} />
+								<Route path="/categories/:id?" component={CategoryPage} />
 								<Route path="/brands/" component={BrandPage} />
 
 							</div>
